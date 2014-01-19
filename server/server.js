@@ -49,3 +49,17 @@ Accounts.registerLoginHandler(function(loginRequest) {
 	}
 	return output;
 });
+
+var getCredentials = function() {
+	return Meteor.users.findOne({
+		_id : Meteor.userId()
+	});
+};
+
+Meteor.methods({
+	getCommunities: function() {
+		var auth = getCredentials();
+		var service = new ConnectionsService(auth.username, auth.password);
+		return service.getCommunities();
+	}
+});
