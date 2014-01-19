@@ -1,0 +1,4 @@
+.project
+npm-debug.log
+.meteor
+smart.lock

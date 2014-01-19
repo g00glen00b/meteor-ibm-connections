@@ -1,0 +1,8 @@
+<template name="communities">
+	{{#if isLoggedIn}}
+		{{> navigation}}
+		<p>You're logged in!</p>
+	{{else}}
+		{{> login}}
+	{{/if}}
+</template>

@@ -1,0 +1,26 @@
+<template name="login">
+	<div class="ui three column grid">
+		<div class="column"></div>
+		<div class="column">
+			<form name="login">
+				<div class="ui fluid form segment">
+					<h3 class="ui header">Log-in</h3>
+					<div class="field">
+						<label>Username</label>
+						<input placeholder="Username" name="username" type="text" />
+					</div>
+					<div class="field">
+						<label>Password</label>
+						<input placeholder="Password" name="password" type="password" />
+		      		</div>
+					<button type="submit" class="ui blue submit button">Login</button>
+				</div>
+			</form>
+			{{#if loginFailed}}
+				<div class="ui bottom attached red message">
+  					<i class="icon attention"></i> Logging in failed
+				</div>
+			{{/if}}
+	  	</div>
+	 </div>
+ </template>
