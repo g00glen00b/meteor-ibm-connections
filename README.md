@@ -21,3 +21,6 @@ Execute following commands:
 
 `mrt`
 
+# Demo
+
+Go to [http://optis.meteor.com]

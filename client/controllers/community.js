@@ -1,3 +1,8 @@
+/*jslint nomen: true*/
+/*jslint node: true */
+/*globals Template, Session, Profiles, Communities */
+"use strict";
+
 Template.community.id = function() {
 	return Session.get("communityId");
 };

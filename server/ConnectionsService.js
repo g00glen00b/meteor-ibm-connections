@@ -1,13 +1,21 @@
+/*jslint nomen: true*/
+/*jslint node: true */
+/*jslint stupid: true */
+/*globals Npm, ConnectionsService: true, xml2js, HTTP */
+"use strict";
+
 var API_URL = "http://connections.cronos.be",
 	_ = Npm.require("underscore");
-ConnectionsService = function(/** String */ username, /** String */ password) {
-	this.username = username;;
+	
+global.ConnectionsService = function(/** String */ username, /** String */ password) {
+	this.username = username;
 	this.password = password;
 	this.profileData = null;
 
 	this.getAuthentication = function() {
 		return this.username + ":" + this.password;
-	}
+	};
+	
 	this.isValid = function() {
 		var isValid = true;
 		try {
@@ -24,22 +32,24 @@ ConnectionsService = function(/** String */ username, /** String */ password) {
 		});
 	};
 	this.getDisplayName = function() {
+	    var obj = null;
 		if (this.profileData === null) {
 			this.getProfileData();
 		}
-		var obj = xml2js.parseStringSync(this.profileData.content);
+		obj = xml2js.parseStringSync(this.profileData.content);
 		return obj.service.workspace[0]['atom:title'][0]._;
 	};
 	
 	this.getCommunities = function() {
-		var auth = this.getAuthentication();
-		var data = HTTP.get(API_URL + "/communities/service/atom/communities/my", {
+		var auth = this.getAuthentication(), data = null, obj = null;
+        
+        data = HTTP.get(API_URL + "/communities/service/atom/communities/my", {
 			auth: auth
 		});
-		var obj = xml2js.parseStringSync(data.content);
+		obj = xml2js.parseStringSync(data.content);
 		return _.map(obj.feed.entry, function(entry) {
-			var summary = _.filter(entry['summary'], function(summary) {
-				return summary['$'].type === "text"
+			var summary = _.filter(entry.summary, function(summary) {
+				return summary.$.type === "text";
 			})[0]._;
 			return {
 				uid: entry['snx:communityUuid'][0],
@@ -55,33 +65,33 @@ ConnectionsService = function(/** String */ username, /** String */ password) {
 	this.getCommunityUids = function() {
 		var communities = this.getCommunities();
 		return _.map(communities, function(community) {
-			return community.uid
+			return community.uid;
 		});
 	};
 	
 	this.getProfiles = function(/** String */ communityId) {
-		var page = 1;
-		var profiles = [];
+		var page = 1, profiles = [], results = null;
 		do {
-			var results = this.getProfilesPage(communityId, page);
+			results = this.getProfilesPage(communityId, page);
 			profiles = profiles.concat(results.members);
-			page++;
+			page += 1;
 		} while (results.startIndex + results.itemsPerPage <= results.totalResults);
 		return profiles;
 	};
 	
 	this.getProfilesPage = function(/** String */ communityId, /** Integer */ page) {
-		var auth = this.getAuthentication();
-		var data = HTTP.get(API_URL + "/communities/service/atom/community/members?communityUuid=" + communityId + "&page=" + page, {
+		var auth = this.getAuthentication(), data = null, obj = null, members = null;
+		
+		data = HTTP.get(API_URL + "/communities/service/atom/community/members?communityUuid=" + communityId + "&page=" + page, {
 			auth: auth
 		});
-		var obj = xml2js.parseStringSync(data.content);
-		 var members = _.map(obj.feed.entry, function(profile) {
-			 return {
+		obj = xml2js.parseStringSync(data.content);
+        members = _.map(obj.feed.entry, function(profile) {
+            return {
 				displayName: profile.title[0]._,
 				uid: profile.contributor[0]['snx:userid'][0]._
 			};
-		 });
+		});
 		return {
 			totalResults: obj.feed['opensearch:totalResults'][0]._,
 			itemsPerPage: obj.feed['opensearch:itemsPerPage'][0]._,

@@ -1,3 +1,8 @@
+/*jslint nomen: true*/
+/*jslint node: true */
+/*globals Handlebars, jQuery */
+"use strict";
+
 Handlebars.registerHelper('formatDate', function(date) {
 	return jQuery.timeago(date); 
 });

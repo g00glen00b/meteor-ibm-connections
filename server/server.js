@@ -1,4 +1,9 @@
-_ = Npm.require("underscore");
+/*jslint nomen: true*/
+/*jslint node: true */
+/*globals Npm, Meteor, Profiles, Accounts, ConnectionsService */
+"use strict";
+
+var _ = Npm.require("underscore");
 
 Meteor.startup(function() {
 	
@@ -15,66 +20,61 @@ Meteor.publish("user_meta", function() {
 });
 
 Meteor.publish("profiles", function() {
-	var user = Meteor.users.findOne({
+	var communities = [],
+        user = Meteor.users.findOne({
 		_id: this.userId
 	},  {
 		fields: {
 			'communities': 1
 		}
 	});
-	var communities = [];
 	if (user !== undefined && user.communities !== undefined) {
 		communities = user.communities;
 	}
-	return Profiles.find({
-		community: {
-			$in: communities
-		}
-	}, {
+	return Profiles.find({ }, {
 		sort: {
 			'displayName': 1
 		}
 	});
 });
 
-Accounts.registerLoginHandler(function(loginRequest) {
-	var output = null;
-	if (loginRequest !== null && loginRequest.username !== undefined && loginRequest.password !== undefined) {
-		var service = new ConnectionsService(loginRequest.username, loginRequest.password);
-		if (service.isValid()) {
-			var userId = null;
-			var user = Meteor.users.findOne({
-				username: loginRequest.username
-			});
-		
-			if(!user) {
-				userId = Meteor.users.insert({
-					username: loginRequest.username
-				});
-			} else {
-				userId = user._id;
-			}
-	
-			var stampedToken = Accounts._generateStampedLoginToken();
-			Meteor.users.update(userId, {
-				$push: {
-					'services.resume.loginTokens': stampedToken
-				},
-				$set: {
-					'password': loginRequest.password,
-					'displayName': service.getDisplayName(),
-					'communities': service.getCommunityUids()
-				}
-			});
-	
-			output = {
-				id: userId,
-				token: stampedToken.token
-			};
-		}
-	}
-	return output;
-});
+var handleLogin = function(loginRequest) {
+    var service = new ConnectionsService(loginRequest.username, loginRequest.password),
+        userId = null,
+        user = null,
+        stampedToken = null;
+    if (service.isValid()) {
+        userId = null;
+        user = Meteor.users.findOne({
+            username: loginRequest.username
+        });
+    
+        if(!user) {
+            userId = Meteor.users.insert({
+                username: loginRequest.username
+            });
+        } else {
+            userId = user._id;
+        }
+
+        stampedToken = Accounts._generateStampedLoginToken();
+        Meteor.users.update(userId, {
+            $push: {
+                'services.resume.loginTokens': stampedToken
+            },
+            $set: {
+                'password': loginRequest.password,
+                'displayName': service.getDisplayName(),
+                'communities': service.getCommunityUids()
+            }
+        });
+
+        return {
+            id: userId,
+            token: stampedToken.token
+        };
+    }  
+};
 
 var getCredentials = function() {
 	return Meteor.users.findOne({
@@ -85,17 +85,27 @@ var getCredentials = function() {
 	});
 };
 
+var getService = function() {
+    var auth = getCredentials();
+    return new ConnectionsService(auth.username, auth.password);
+};
+
+Accounts.registerLoginHandler(function(loginRequest) {
+    var output = null;
+    if (loginRequest !== null && loginRequest.username !== undefined && loginRequest.password !== undefined) {
+        output = handleLogin(loginRequest);
+    }
+    return output;
+});
+
 Meteor.methods({
 	getCommunities: function() {
-		var auth = getCredentials();
-		var service = new ConnectionsService(auth.username, auth.password);
-		return service.getCommunities();
+		return getService().getCommunities();
 	},
 	
 	getProfiles: function(communityId) {
-		var auth = getCredentials();
-		var service = new ConnectionsService(auth.username, auth.password);
-		var profiles = service.getProfiles(communityId);
+		var service = getService(),
+            profiles = service.getProfiles(communityId);
 		_.each(profiles, function(profile) {
 			Profiles.upsert({
 				uid: profile.uid
@@ -121,8 +131,6 @@ Meteor.methods({
 	},
 	
 	getProfile: function(communityId) {
-		var auth = getCredentials();
-		var service = new ConnectionsService(auth.username, auth.password);
-		return service.getProfiles(communityId);
+		return getService().getProfiles(communityId);
 	}
 });

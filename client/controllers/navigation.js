@@ -1,7 +1,17 @@
+/*jslint nomen: true*/
+/*jslint node: true */
+/*globals Template, Meteor */
+"use strict";
+
 Template.navigation.user = function() {
-	return Meteor.users.findOne({
+	var displayName = null, user = Meteor.users.findOne({
 		_id: Meteor.userId()
-	}).displayName;
+	});
+	
+	if (user !== undefined) {
+        displayName = user.displayName;
+    }
+    return displayName;
 };
 
 Template.navigation.events = {

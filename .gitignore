@@ -1,4 +1,5 @@
 .project
+.settings
 .meteor
 npm-debug.log
 smart.lock

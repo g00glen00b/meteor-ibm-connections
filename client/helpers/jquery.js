@@ -1,6 +1,10 @@
+/*jslint nomen: true*/
+/*jslint node: true */
+/*globals $ */
+"use strict";
+
 $.fn.serializeObject = function() {
-    var o = {};
-    var a = this.serializeArray();
+    var o = {}, a = this.serializeArray();
     $.each(a, function() {
         if (o[this.name] !== undefined) {
             if (!o[this.name].push) {
