@@ -23,4 +23,4 @@ Execute following commands:
 
 # Demo
 
-Go to [http://optis.meteor.com]
+Go to [http://optis.meteor.com](http://optis.meteor.com)
