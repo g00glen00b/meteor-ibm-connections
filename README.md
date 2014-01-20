@@ -17,7 +17,7 @@ Execute following commands:
 
 # Execution
 
-Execute followingcommands:
+Execute following commands:
 
 `mrt`
 

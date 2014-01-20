@@ -28,7 +28,6 @@ ConnectionsService = function(/** String */ username, /** String */ password) {
 			this.getProfileData();
 		}
 		var obj = xml2js.parseStringSync(this.profileData.content);
-		console.log(obj.service.workspace[0]['atom:title'][0]._);
 		return obj.service.workspace[0]['atom:title'][0]._;
 	};
 	
@@ -51,5 +50,44 @@ ConnectionsService = function(/** String */ username, /** String */ password) {
 				updated: new Date(entry.updated)
 			};
 		});
+	};
+	
+	this.getCommunityUids = function() {
+		var communities = this.getCommunities();
+		return _.map(communities, function(community) {
+			return community.uid
+		});
+	};
+	
+	this.getProfiles = function(/** String */ communityId) {
+		var page = 1;
+		var profiles = [];
+		do {
+			var results = this.getProfilesPage(communityId, page);
+			profiles = profiles.concat(results.members);
+			page++;
+		} while (results.startIndex + results.itemsPerPage <= results.totalResults);
+		return profiles;
+	};
+	
+	this.getProfilesPage = function(/** String */ communityId, /** Integer */ page) {
+		var auth = this.getAuthentication();
+		var data = HTTP.get(API_URL + "/communities/service/atom/community/members?communityUuid=" + communityId + "&page=" + page, {
+			auth: auth
+		});
+		var obj = xml2js.parseStringSync(data.content);
+		 var members = _.map(obj.feed.entry, function(profile) {
+			 return {
+				displayName: profile.title[0]._,
+				uid: profile.contributor[0]['snx:userid'][0]._
+			};
+		 });
+		return {
+			totalResults: obj.feed['opensearch:totalResults'][0]._,
+			itemsPerPage: obj.feed['opensearch:itemsPerPage'][0]._,
+			startIndex: obj.feed['opensearch:startIndex'][0]._,
+			id: communityId,
+			members: members
+		};
 	};
 };

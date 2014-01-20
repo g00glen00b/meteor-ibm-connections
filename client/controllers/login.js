@@ -6,6 +6,7 @@ Template.login.events = {
 			methodArguments: [$(evt.target).serializeObject()],
 			userCallback: function(data) {
 				Session.set("loginFailed", data !== undefined);
+				Template.communities.getCommunities();
 			}
 		});
 	}

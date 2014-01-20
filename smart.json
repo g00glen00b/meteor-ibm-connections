@@ -1,7 +1,7 @@
 {
   "packages": {
-    "router": {},
     "npm": {},
-    "xml2js": {}
+    "xml2js": {},
+    "iron-router": {}
   }
 }

@@ -1,0 +1,35 @@
+<template name="community">
+	<div class="ui grid">
+		<div class="two wide column"></div>
+		<div class="twelve wide column">
+			<div class="ui breadcrumb">
+				<a class="section" href="/">Communities</a>
+				<i class="right arrow icon divider"></i>
+				<div class="active section">{{community.title}}</div>
+			</div>
+			<h2 class="ui header">
+	  			<i class="users icon"></i>
+	  			<div class="content">
+	    			{{community.title}}
+	  			</div>
+			</h2>
+			
+			<div class="ui relaxed divided list">
+				{{#each profiles}}
+					<div class="item">
+						<i class="user icon"></i>
+						<div class="content">
+							<div class="header">{{displayName}}</div>
+							<div class="description">
+								{{koffiekoeken}} koffiekoeken
+								<div class="ui buttons">
+									 <button class="mini ui button add" value="{{_id}}">+1</button>
+									 <button class="mini ui button remove" value="{{_id}}">-1</button>
+								</div>
+							</div>
+						</div>
+					</div>
+    			{{/each}}
+			</div>
+		</div>
+</template>
