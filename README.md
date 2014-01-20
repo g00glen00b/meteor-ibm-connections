@@ -9,6 +9,8 @@ Install Node.js (including Node package manager), Meteor and meteorite.
 
 Execute following commands:
 
+`mrt install`
+
 `mrt add accounts-ui`
 
 `mrt remove autopublish`
