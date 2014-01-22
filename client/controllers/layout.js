@@ -4,5 +4,5 @@
 "use strict";
 
 Template.layout.isLoggedIn = function() {
-    return Meteor.userId();
+	return Meteor.userId();
 };

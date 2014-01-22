@@ -13,7 +13,7 @@ Template.communities.communities = function() {
 
 
 Template.communities.getCommunities = function() {
-    var idx;
+	var idx;
 	if (Meteor.userId()) {
 		Meteor.call("getCommunities", function(error, communities) {
 			if (communities.length !== undefined) {
@@ -29,4 +29,6 @@ Template.communities.getCommunities = function() {
 	}
 };
 
-Template.communities.getCommunities();
+Deps.autorun(function() {
+	Template.communities.getCommunities();
+});

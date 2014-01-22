@@ -1,13 +1,7 @@
-/*jslint nomen: true*/
-/*jslint node: true */
-/*jslint stupid: true */
-/*globals Npm, ConnectionsService: true, xml2js, HTTP */
-"use strict";
-
 var API_URL = "http://connections.cronos.be",
 	_ = Npm.require("underscore");
 	
-global.ConnectionsService = function(/** String */ username, /** String */ password) {
+ConnectionsService = function(/** String */ username, /** String */ password) {
 	this.username = username;
 	this.password = password;
 	this.profileData = null;
@@ -25,14 +19,16 @@ global.ConnectionsService = function(/** String */ username, /** String */ passw
 		}
 		return isValid;
 	};
+	
 	this.getProfileData = function() {
 		var auth = this.getAuthentication();
 		this.profileData = HTTP.get(API_URL + "/profiles/atom/profileService.do", {
 			auth: auth
 		});
 	};
+	
 	this.getDisplayName = function() {
-	    var obj = null;
+		var obj = null;
 		if (this.profileData === null) {
 			this.getProfileData();
 		}
@@ -42,8 +38,8 @@ global.ConnectionsService = function(/** String */ username, /** String */ passw
 	
 	this.getCommunities = function() {
 		var auth = this.getAuthentication(), data = null, obj = null;
-        
-        data = HTTP.get(API_URL + "/communities/service/atom/communities/my", {
+		
+		data = HTTP.get(API_URL + "/communities/service/atom/communities/my", {
 			auth: auth
 		});
 		obj = xml2js.parseStringSync(data.content);
@@ -86,10 +82,11 @@ global.ConnectionsService = function(/** String */ username, /** String */ passw
 			auth: auth
 		});
 		obj = xml2js.parseStringSync(data.content);
-        members = _.map(obj.feed.entry, function(profile) {
-            return {
+		members = _.map(obj.feed.entry, function(profile) {
+			return {
 				displayName: profile.title[0]._,
-				uid: profile.contributor[0]['snx:userid'][0]._
+				uid: profile.contributor[0]['snx:userid'][0]._,
+				mail: CryptoJS.MD5(profile.contributor[0]['email'][0]).toString()
 			};
 		});
 		return {

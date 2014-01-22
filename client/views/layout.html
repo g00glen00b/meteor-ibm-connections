@@ -1,8 +1,22 @@
 <template name="layout">
-	{{#if isLoggedIn}}
-		{{> navigation}}
-		{{yield}}
-	{{else}}
-		{{> login}}
-	{{/if}}
+	<div class="container">
+		{{#if isLoggedIn}}
+			{{> navigation}}
+			{{yield}}
+		{{else}}
+			{{> login}}
+		{{/if}}
+	</div>
+	
+	<div class="ui divider"></div>
+	<div class="ui divided horizontal footer link list">
+		<div class="item">Dimitri Mestdagh</div>
+			<a href="https://bitbucket.org/OptisCronos/ibmcnx-meteor-webapp" class="item">BitBucket</a>
+			<div class="item">
+				Built with <a href="http://www.meteor.com" target="_blank">Meteor</a>
+			</div>
+			<div class="item">
+				UI with <a href="http://semantic-ui.com" target="_blank">Semantic UI</a>
+			</div>
+		</div>
 </template>

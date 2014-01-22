@@ -14,8 +14,21 @@ Template.community.community = function() {
 };
 
 Template.community.profiles = function() {
+	var activeSort = {}, sort = Session.get("sort");
+	if (sort === "alphabet") {
+		activeSort = {
+			"displayName": 1	
+		};
+	} else if (sort === "koffiekoeken") {
+		activeSort = {
+			"koffiekoeken": -1,
+			"displayName": 1
+		};
+	}
 	return Profiles.find({
 		communities: Session.get("communityId")
+	}, {
+		sort: activeSort 
 	});
 };
 
@@ -42,5 +55,13 @@ Template.community.events = {
 				}
 			});
 		}
+	},
+	
+	"click .alphabetically": function() {
+		Session.set("sort", "alphabet");
+	},
+	
+	"click .koffiekoeken": function() {
+		Session.set("sort", "koffiekoeken");
 	}
 };

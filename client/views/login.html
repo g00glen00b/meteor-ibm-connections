@@ -1,7 +1,7 @@
 <template name="login">
 	<div class="ui grid">
 		<div class="three wide column"></div>
-		<div class="ten wide column">
+		<div class="five wide column">
 			<form name="login">
 				<div class="ui fluid form segment">
 					<h3 class="ui header">Log-in</h3>
@@ -12,7 +12,7 @@
 					<div class="field">
 						<label>Password</label>
 						<input placeholder="Password" name="password" type="password" />
-		      		</div>
+			  		</div>
 					<button type="submit" class="ui blue submit button">Login</button>
 				</div>
 			</form>
@@ -21,6 +21,14 @@
   					<i class="icon attention"></i> Logging in failed
 				</div>
 			{{/if}}
+		</div>
+		<div class="five wide column">
+			<div class="ui fluid form segment">
+				<h3 class="ui header">What's this?</h3>
+				<p>This application is an extension to Cronos Connections, a platform that allows you to become more social with your colleagues.</p>
+				<p>Make sure you check it out first!</p>
+				<a href="http://connections.cronos.be" class="ui blue button">Go to Connections &gt;</a>
+			</div>
 	  	</div>
 	 </div>
  </template>

@@ -16,3 +16,7 @@ Handlebars.registerHelper('formatSummary', function(summary) {
 Handlebars.registerHelper('isPublic', function(community) {
 	return community.type !== "private";
 });
+
+Handlebars.registerHelper('activeSort', function(sort) {
+    return Session.get('sort') == sort ? 'active' : '';
+});

@@ -9,9 +9,9 @@ Template.navigation.user = function() {
 	});
 	
 	if (user !== undefined) {
-        displayName = user.displayName;
-    }
-    return displayName;
+		displayName = user.displayName;
+	}
+	return displayName;
 };
 
 Template.navigation.events = {
