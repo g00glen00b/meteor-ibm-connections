@@ -2,7 +2,6 @@
   "packages": {
     "npm": {},
     "xml2js": {},
-    "iron-router": {},
-    "crypto-md5": {}
+    "iron-router": {}
   }
 }

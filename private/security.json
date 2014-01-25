@@ -1,0 +1,9 @@
+{
+	"secret": "IwYPc2yulIRt6klMgVYyEJ1TmK6x5tpo",
+	"repeat": 10,
+	"algorithms": {
+		"cipher": "AES-128-CBC",
+		"hash": "SHA256"
+	},
+	"maxRandom": 10000
+}
