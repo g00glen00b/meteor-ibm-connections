@@ -18,5 +18,13 @@ Handlebars.registerHelper('isPublic', function(community) {
 });
 
 Handlebars.registerHelper('activeSort', function(sort) {
-    return Session.get('sort') == sort ? 'active' : '';
+    return Session.get('sort') === sort ? 'active' : '';
+});
+
+Handlebars.registerHelper('koffiekoekenAmount', function(amount) {
+	return amount < 0 ? 'red' : '';
+});
+
+Handlebars.registerHelper('isLaurens', function(displayName) {
+	return displayName === 'Peeters Laurens';
 });

@@ -46,12 +46,26 @@ Template.community.events = {
 		var profile = Profiles.findOne({
 			_id: evt.target.value
 		});
-		if (profile.koffiekoeken !== undefined && profile.koffiekoeken > 0) {
+		if (profile.koffiekoeken !== undefined) {
 			Profiles.update({
 				_id: evt.target.value
 			}, {
 				$inc: {
 					'koffiekoeken': -1
+				}
+			});
+		}
+	},
+	"click .removeALot": function(evt) {
+		var profile = Profiles.findOne({
+			_id: evt.target.value
+		});
+		if (profile.koffiekoeken !== undefined) {
+			Profiles.update({
+				_id: evt.target.value
+			}, {
+				$inc: {
+					'koffiekoeken': -100
 				}
 			});
 		}

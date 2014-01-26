@@ -31,11 +31,14 @@
 						<div class="content">
 							<div class="header">{{displayName}}</div>
 						</div>
-						<div class="right floated description">
+						<div class="right floated description {{koffiekoekenAmount koffiekoeken}}">
 							{{koffiekoeken}} koffiekoeken
 							<div class="ui buttons">
 								 <button class="mini ui button add" value="{{_id}}">+1</button>
 								 <button class="mini ui button remove" value="{{_id}}">-1</button>
+								 {{#if isLaurens displayName}}
+								 	<button class="mini ui button removeALot" value="{{_id}}">-100</button>
+								 {{/if}}
 							</div>
 						</div>
 					</div>

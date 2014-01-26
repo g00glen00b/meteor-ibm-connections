@@ -11,3 +11,7 @@ a:hover {
 	text-align: center;
 	margin-bottom: 1.5rem;
 }
+
+.ui.list .item .red.description {
+	color: #A95252;
+}

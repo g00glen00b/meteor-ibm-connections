@@ -1,5 +1,5 @@
 var Crypto = Npm.require("crypto"), securityData = JSON.parse(Assets.getText("security.json")),
-	seed = Math.floor(Math.random() * securityData.maxRandom);
+	seed = /** Math.floor(Math.random() * securityData.maxRandom) */ 0;
 
 SecurityService = {
 	generateKey: function(/** String */ data) {
