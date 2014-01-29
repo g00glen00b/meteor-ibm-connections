@@ -6,3 +6,5 @@
 Template.layout.isLoggedIn = function() {
 	return Meteor.userId();
 };
+
+Session.set("sort", "alphabet");

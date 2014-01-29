@@ -2,6 +2,7 @@
   "packages": {
     "npm": {},
     "xml2js": {},
-    "iron-router": {}
+    "iron-router": {},
+    "semantic-ui": {}
   }
 }

@@ -11,9 +11,6 @@ Template.login.events = {
 			methodArguments: [$(evt.target).serializeObject()],
 			userCallback: function(data) {
 				Session.set("loginFailed", data !== undefined);
-				if (data === undefined) {
-					Session.set("sort", "alphabet");
-				}
 			}
 		});
 	}

@@ -24,3 +24,4 @@ Execute following commands:
 # Demo
 
 Go to [http://optis.meteor.com](http://optis.meteor.com)
+You can find the slides at [http://g00glen00b.be/slides](http://g00glen00b.be/slides)
