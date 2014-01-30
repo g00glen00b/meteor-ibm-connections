@@ -1,5 +1,12 @@
 Meteor - IBM Connections
 ===
+Simple web application show how to integrate third party services (IBM Connections API in this case) into a Meteor web application. Frameworks used are
+
+* Meteor
+* Underscore.js
+* Semantic UI
+* jQuery
+* jQuery Timeago
 
 # Prerequisites
 
@@ -24,4 +31,5 @@ Execute following commands:
 # Demo
 
 Go to [http://optis.meteor.com](http://optis.meteor.com)
-You can find the slides at [http://g00glen00b.be/slides](http://g00glen00b.be/slides)
+
+You can find the slides at [http://g00glen00b.github.io/meteor-ibm-connections](http://g00glen00b.github.io/meteor-ibm-connections)
