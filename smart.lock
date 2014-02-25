@@ -20,13 +20,13 @@
       },
       "iron-router": {
         "git": "https://github.com/EventedMind/iron-router.git",
-        "tag": "v0.6.2",
-        "commit": "ce56e58b45624dce992490f3a1c10f10d3948bae"
+        "tag": "v0.6.4",
+        "commit": "927bbaed1b87894fb6fb70807f74ff3a5bd89f29"
       },
       "semantic-ui": {
         "git": "https://github.com/nooitaf/meteor-semantic-ui.git",
-        "tag": "v0.12.1",
-        "commit": "6d895bcec1953a1dd609541288fccc3971520d72"
+        "tag": "v0.13.0",
+        "commit": "e52080af47b590b6204d0824ece47e0f1a914f76"
       },
       "blocking": {
         "git": "https://github.com/peerlibrary/meteor-blocking.git",

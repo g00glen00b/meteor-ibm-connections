@@ -1,4 +1,4 @@
-var Crypto = Npm.require("crypto"), securityData = JSON.parse(Assets.getText("security.json")),
+var Crypto = Meteor.require("crypto"), securityData = JSON.parse(Assets.getText("security.json")),
 	seed = /** Math.floor(Math.random() * securityData.maxRandom) */ 0;
 
 SecurityService = {

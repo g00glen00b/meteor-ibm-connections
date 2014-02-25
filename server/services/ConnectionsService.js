@@ -1,5 +1,6 @@
 var API_URL = "http://connections.cronos.be",
-	_ = Npm.require("underscore");
+	_ = Npm.require("underscore"),
+	Crypto = Meteor.require("crypto");
 	
 ConnectionsService = function(/** String */ username, /** String */ password) {
 	this.username = username;
@@ -86,7 +87,7 @@ ConnectionsService = function(/** String */ username, /** String */ password) {
 			return {
 				displayName: profile.title[0]._,
 				uid: profile.contributor[0]['snx:userid'][0]._,
-				mail: CryptoJS.MD5(profile.contributor[0]['email'][0]).toString()
+				mail: Crypto.createHash('md5').update(profile.contributor[0]['email'][0]).digest('hex')
 			};
 		});
 		return {
