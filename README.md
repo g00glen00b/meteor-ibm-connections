@@ -18,6 +18,8 @@ Execute following commands:
 
 `mrt install`
 
+`mrt update`
+
 `mrt add accounts-ui`
 
 `mrt remove autopublish`
