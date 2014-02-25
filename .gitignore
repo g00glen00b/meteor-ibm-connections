@@ -1,6 +1,6 @@
 .project
 .settings
-.meteor
+.meteor/local
 npm-debug.log
 node_modules
 smart.lock
