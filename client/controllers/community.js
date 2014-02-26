@@ -34,14 +34,12 @@ Template.community.profiles = function() {
 
 Template.community.events = {
 	"click .alphabetically": function() {
-		console.log("alphabet");
 		Session.set("sort", "alphabet");
 	},
 	
 	"click .koffiekoeken": function() {
-		console.log("koffiekoeken");
 		Session.set("sort", "koffiekoeken");
-	}	
+	}
 };
 
 Template.profile.events = {
