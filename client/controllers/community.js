@@ -32,6 +32,18 @@ Template.community.profiles = function() {
 	});
 };
 
+Template.community.events = {
+	"click .alphabetically": function() {
+		console.log("alphabet");
+		Session.set("sort", "alphabet");
+	},
+	
+	"click .koffiekoeken": function() {
+		console.log("koffiekoeken");
+		Session.set("sort", "koffiekoeken");
+	}	
+};
+
 Template.profile.events = {
 	"click .add": function(evt) {
 		Profiles.update({
@@ -41,13 +53,5 @@ Template.profile.events = {
 				"koffiekoeken": parseInt($(evt.target).attr("data-amount"))
 			}
 		});
-	},
-	
-	"click .alphabetically": function() {
-		Session.set("sort", "alphabet");
-	},
-	
-	"click .koffiekoeken": function() {
-		Session.set("sort", "koffiekoeken");
 	}
 };
