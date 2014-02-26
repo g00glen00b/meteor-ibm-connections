@@ -42,7 +42,11 @@ Meteor.publish("profiles", function() {
 	if (user !== undefined && user.communities !== undefined) {
 		communities = user.communities;
 	}
-	return Profiles.find({ }, {
+	return Profiles.find({ 
+		communities: {
+			$in: communities
+		}
+	}, {
 		sort: {
 			'displayName': 1
 		}

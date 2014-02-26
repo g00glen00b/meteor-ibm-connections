@@ -32,43 +32,15 @@ Template.community.profiles = function() {
 	});
 };
 
-Template.community.events = {
+Template.profile.events = {
 	"click .add": function(evt) {
 		Profiles.update({
-			_id: evt.target.value
+			_id: this._id
 		}, {
 			$inc: {
-				'koffiekoeken': 1
+				"koffiekoeken": parseInt($(evt.target).attr("data-amount"))
 			}
 		});
-	},
-	"click .remove": function(evt) {
-		var profile = Profiles.findOne({
-			_id: evt.target.value
-		});
-		if (profile.koffiekoeken !== undefined) {
-			Profiles.update({
-				_id: evt.target.value
-			}, {
-				$inc: {
-					'koffiekoeken': -1
-				}
-			});
-		}
-	},
-	"click .removeALot": function(evt) {
-		var profile = Profiles.findOne({
-			_id: evt.target.value
-		});
-		if (profile.koffiekoeken !== undefined) {
-			Profiles.update({
-				_id: evt.target.value
-			}, {
-				$inc: {
-					'koffiekoeken': -100
-				}
-			});
-		}
 	},
 	
 	"click .alphabetically": function() {

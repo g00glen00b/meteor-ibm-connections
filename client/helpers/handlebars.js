@@ -25,6 +25,6 @@ Handlebars.registerHelper('koffiekoekenAmount', function(amount) {
 	return amount < 0 ? 'red' : '';
 });
 
-Handlebars.registerHelper('isLaurens', function(displayName) {
-	return displayName === 'Peeters Laurens';
+Handlebars.registerHelper('isLaurens', function(profile) {
+	return profile.displayName === 'Peeters Laurens';
 });
