@@ -33,7 +33,14 @@ Meteor.methods({
 			Profiles.upsert({
 				uid: profile.uid
 			}, {
-				$set: profile,
+				$set: profile
+			});
+			Profiles.update({
+				uid: profile.uid,
+				communities: {
+					$ne: communityId
+				}
+			}, {
 				$push: {
 					communities: communityId
 				}

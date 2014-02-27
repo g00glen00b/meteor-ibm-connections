@@ -28,3 +28,7 @@ Handlebars.registerHelper('koffiekoekenAmount', function(amount) {
 Handlebars.registerHelper('isLaurens', function(profile) {
 	return profile.displayName === 'Peeters Laurens';
 });
+
+Handlebars.registerHelper('isDimitri', function(profile) {
+	return profile.displayName === 'Mestdagh Dimitri';
+});

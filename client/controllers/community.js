@@ -24,6 +24,10 @@ Template.community.profiles = function() {
 			"koffiekoeken": -1,
 			"displayName": 1
 		};
+	} else if (sort === "alphabetReverse") {
+		activeSort = {
+			"displayName": -1
+		}
 	}
 	return Profiles.find({
 		communities: Session.get("communityId")
@@ -39,6 +43,10 @@ Template.community.events = {
 	
 	"click .koffiekoeken": function() {
 		Session.set("sort", "koffiekoeken");
+	},
+	
+	"click .alphabeticallyReverse": function() {
+		Session.set("sort", "alphabetReverse");
 	}
 };
 

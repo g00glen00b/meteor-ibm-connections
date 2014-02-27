@@ -6,6 +6,9 @@
   				<a class="{{activeSort 'alphabet'}} item alphabetically">
     				<i class="sort alphabet icon"></i> Alfabetisch
   				</a>
+  				<a class="{{activeSort 'alphabetReverse'}} item alphabeticallyReverse">
+					<i class="sort alphabet descending icon"></i> Omgekeerd alfabetisch
+				</a>
   				<a class="{{activeSort 'koffiekoeken'}} item koffiekoeken">
     				<i class="sort attributes descending icon"></i> Koffiekoeken
   				</a>
@@ -41,6 +44,9 @@
 		<div class="right floated description {{koffiekoekenAmount koffiekoeken}}">
 			{{koffiekoeken}} koffiekoeken
 			<div class="ui buttons">
+				{{#if isDimitri this}}
+					<button class="mini ui button add" data-amount="+100">+100</button>
+				{{/if}}
 				 <button class="mini ui button add" data-amount="1">+1</button>
 				 <button class="mini ui button add" data-amount="-1">-1</button>
 				 {{#if isLaurens this}}
