@@ -53,8 +53,14 @@
 
 					<section>
 						<h2>Ease structuring app</h2>
-						<p>Files are automatically loaded depending on the folder they're in. Server-files will run on the server-environment, while client-files will run on the client-environment.</p>
-						<p>No need for pages of <code>&lt;script&gt;</code> tags (+ management).</p>
+						<p>Purpose of file is depending on the folder they're in. Meteor uses the following folders:<ol>
+							<li>server</li>
+							<li>private</li>
+							<li>client</li>
+							<li>public</li>
+							<li>models</li>
+						</ol></p>
+						<p>Script files and stylesheets are automatically appended to your application, no more <code>&lt;script&gt;</code> hell.</p>
 
 						<aside class="notes">
 							<p>Demo: Show seperation of files, including ConnectionsService.</p>
